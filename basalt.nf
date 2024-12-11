@@ -2,10 +2,10 @@
 
 params.input_assembly = ""
 params.input_fastq = ""
+params.outdir = ""
 
-
-params.fastq_pattern = "${params.input_fastq}/*/*_{1,2}.{fastq,fastq.gz}"
 params.fa_pattern = "${params.input_assembly}/*/*.{fa,fasta}"
+params.fastq_pattern = "${params.input_fastq}/*/*_{1,2}.{fastq,fastq.gz}"
 
 process BASALT {
     tag "${meta.id}" 
@@ -16,7 +16,7 @@ process BASALT {
         task.attempt <= 3 ? 'retry' : 'ignore'
     }
     conda "/opt/anaconda3/envs/BASALT"
-    publishDir "${params.outdir}/results/${meta.id}", mode: 'copy'
+    publishDir "${params.outdir}/Results_basalt/${meta.id}", mode: 'copy'
 
     input:
     tuple val(meta), path(fastq), path(assembly)
@@ -39,10 +39,10 @@ process BASALT {
 
 workflow {
     fastq_ch = Channel.fromFilePairs(params.fastq_pattern).map{meta, fastq->
-    [[id: fastq[0].getParent().getName()], fastq]}
+    [[id: fastq[0].getParent().getName()], fastq]}.view()
     
     fa_ch = Channel.fromPath(params.fa_pattern).map{fa->
-    [[id: fa.getParent().getName()], fa]}
+    [[id: fa.getParent().getName()], fa]}.view()
 
     combined = fastq_ch.combine(fa_ch, by: 0).view()
     
