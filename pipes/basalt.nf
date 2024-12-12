@@ -10,11 +10,6 @@ params.fastq_pattern = "${params.input_fastq}/*/*_{1,2}.{fastq,fastq.gz}"
 process BASALT {
     tag "${meta.id}" 
     debug true
-    maxForks 4
-    maxRetries 4
-    errorStrategy { 
-        task.attempt <= 3 ? 'retry' : 'ignore'
-    }
     conda "/opt/anaconda3/envs/BASALT"
     publishDir "${params.outdir}/Results_basalt/${meta.id}", mode: 'copy'
 

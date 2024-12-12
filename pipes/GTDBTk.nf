@@ -3,6 +3,7 @@
 params.input = "/Metagenomes/inaia/Results_basalt/"
 params.outdir = "/Metagenomes/inaia/Results_taxonomy/GTDBTk_result"
 params.debug = false
+params.gtdbtk_db = "/home/inaiag/Databases/GTDBTk"
 
 params.fa_pattern = "${params.input}/*/Final_bestbinset/*.fa"
 
@@ -30,7 +31,7 @@ workflow {
         def new_meta = [id: 'Samples']
         [new_meta, fasta]}.groupTuple(by: 0)
     
-    gtdb_path = file( "${GTDBTK_DATA}", checkIfExists: true)
+    gtdb_path = file( "${params.gtdbtk_db}", checkIfExists: true)
     
     gtdb_dir = gtdb_path.listFiles()
     

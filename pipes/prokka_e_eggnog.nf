@@ -6,6 +6,7 @@ params.debug = false
 params.arq = "/Metagenomes/inaia/Results_taxonomy/GTDBTk_result/gtdbtk.Samples.ar53.summary.tsv"
 params.bac = "/Metagenomes/inaia/Results_taxonomy/GTDBTk_result/gtdbtk.Samples.bac120.summary.tsv"
 params.scripts_dir = "${moduleDir}/bin"
+params.eggnog_db = "/home/inaiag/Databases/EggNOG"
 
 
 params.fa_pattern = "${params.input}/*/Final_bestbinset/*.fa"
@@ -70,7 +71,7 @@ workflow {
     // combined_ch.count().view{"Channel size: $it"}
 
     annot_info = PROKKA(combined_ch, [], [])
-    eggnog_info = EGGNOGMAPPER(annot_info.gbk)
+    eggnog_info = EGGNOGMAPPER(annot_info.gbk, params.eggnog_db, [], [])
     // copy_files = COPY_GENOMESCAN_FILES(genome_scan_info.csv.combine(genome_scan_info.xlsx, by:0))
     
 }
