@@ -39,7 +39,7 @@ process PROKKA {
     prokka \\
         $args \\
         --cpus $task.cpus \\
-        --prefix $prefix \\
+        --prefix $prefix \\        
         $proteins_opt \\
         $prodigal_tf_opt \\
         $fasta
@@ -48,5 +48,12 @@ process PROKKA {
     "${task.process}":
         prokka: \$(echo \$(prokka --version 2>&1) | sed 's/^.*prokka //')
     END_VERSIONS
+    """
+    stub:
+    prefix   = task.ext.prefix ?: "${meta.id}"
+    """
+    mkdir -p $prefix
+    touch $prefix/annot.{gff,gbk,fna,faa,ffn,sqn,fsa,tbl,err,log,txt,tsv}
+    touch versions.yml
     """
 }
