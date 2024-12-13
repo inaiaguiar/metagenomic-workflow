@@ -1,10 +1,10 @@
 #!/usr/bin/env nextflow
 
-params.input = "/Metagenomes/inaia/Results_basalt/"
-params.outdir = "/Metagenomes/inaia/Results_annotation/"
+params.input = "" // /home/inaiag/Argentina/Results_basalt
+params.outdir = "" // /home/inaiag/Argentina/annotation
 params.debug = false
-params.arq = "/Metagenomes/inaia/Results_taxonomy/GTDBTk_result/gtdbtk.Samples.ar53.summary.tsv"
-params.bac = "/Metagenomes/inaia/Results_taxonomy/GTDBTk_result/gtdbtk.Samples.bac120.summary.tsv"
+params.arq = "/home/inaiag/Argentina/taxonomy/GTDBTk/gtdbtk.Samples.ar53.summary.tsv"
+params.bac = "/home/inaiag/Argentina/taxonomy/GTDBTk/gtdbtk.Samples.bac120.summary.tsv"
 params.scripts_dir = "${moduleDir}/bin"
 params.eggnog_db = "/home/inaiag/Databases/EggNOG"
 
@@ -14,16 +14,16 @@ params.fa_pattern = "${params.input}/*/Final_bestbinset/*.fa"
 include { EGGNOGMAPPER } from '../modules/nf-core/eggnogmapper/main'
 include { PROKKA } from '../modules/nf-core/prokka/main'
 
-process RENAME_FILES {
-    input:
-    tuple val(meta), path(fasta)
-    output:
-    tuple val(meta), path("*.fa")
-    script:
-    """
-    mv ${fasta} ${meta.meta_id}_${meta.id}.fa
-    """
-} 
+// process RENAME_FILES {
+//     input:
+//     tuple val(meta), path(fasta)
+//     output:
+//     tuple val(meta), path("*.fa")
+//     script:
+//     """
+//     mv ${fasta} ${meta.meta_id}_${meta.id}.fa
+//     """
+// } 
 
 // process COPY_GENOMESCAN_FILES {
 
@@ -46,7 +46,7 @@ workflow {
     [[meta_id: fa.getParent().getParent().getName(),
     id: fa.getName().split("_")[0]], fa]}
 
-    fasta_rn_ch = RENAME_FILES(fa_ch)
+    // fasta_rn_ch = RENAME_FILES(fa_ch)
 
     // fa_ch.count().view{"Channel size: $it"}
 
@@ -55,7 +55,6 @@ workflow {
         .map{fa->
             def parts = fa.split("_")
             [[meta_id: parts[0], id: parts[1].split("_")[0]], "Archaea"]}
-
     bac_ch = Channel.fromPath(params.bac)
         .splitCsv(sep: '\t').map{row -> row[0]}
         .map{fa->
@@ -63,15 +62,21 @@ workflow {
             [[meta_id: parts[0], id: parts[1].split("_")[0]], "Bacteria"]}   
 
     geral_ch = arq_ch.concat(bac_ch)
+
+    // combined_ch = fasta_rn_ch.combine(geral_ch, by:0).map{meta, fa, geral ->
+    //     def new_meta = meta+[kingdom: geral]
+    //     [new_meta, fa]}
     
-    combined_ch = fasta_rn_ch.combine(geral_ch, by:0).map{meta, fa, geral ->
+    combined_ch = fa_ch.combine(geral_ch, by:0).map{meta, fa, geral ->
         def new_meta = meta+[kingdom: geral]
-        [new_meta, fa]}
+        [new_meta, fa]}.view()
 
     // combined_ch.count().view{"Channel size: $it"}
 
     annot_info = PROKKA(combined_ch, [], [])
-    eggnog_info = EGGNOGMAPPER(annot_info.gbk, params.eggnog_db, [], [])
+
+    eggnog_info = EGGNOGMAPPER(annot_info.gbk, params.eggnog_db, [], [[], []])
+
     // copy_files = COPY_GENOMESCAN_FILES(genome_scan_info.csv.combine(genome_scan_info.xlsx, by:0))
-    
+
 }
