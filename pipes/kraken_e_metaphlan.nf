@@ -26,3 +26,4 @@ workflow {
     KRAKEN2_KRAKEN2 (fastq_ch, params.kraken_db, Channel.value(false), Channel.value(false))
     METAPHLAN_METAPHLAN(fa_ch, params.metaphlan_db)
 }
+

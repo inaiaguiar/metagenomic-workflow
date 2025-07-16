@@ -31,7 +31,7 @@ workflow {
     //     def new_meta = [id: 'Samples']
     //     [new_meta, fasta]}.groupTuple(by: 0)
     
-    gtdb_path = file( "${params.gtdbtk_db}", checkIfExists: true)
+    gtdb_path = file(params.gtdbtk_db, checkIfExists: true)
     
     gtdb_dir = gtdb_path.listFiles()
     
@@ -41,5 +41,5 @@ workflow {
                         .map { ["gtdb", it] }
     
     // gtdbtk_ch = GTDBTK_CLASSIFYWF(fasta_sh, ch_db_for_gtdbtk, [], [])
-    gtdbtk_ch = GTDBTK_CLASSIFYWF(fa_ch, ch_db_for_gtdbtk, [], [])
+    gtdbtk_ch = GTDBTK_CLASSIFYWF(fa_ch, ch_db_for_gtdbtk, Channel.value(false), [])
 }
