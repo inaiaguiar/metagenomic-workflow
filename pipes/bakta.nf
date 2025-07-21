@@ -12,8 +12,8 @@ params.scripts_dir = "${moduleDir}/bin"
 params.eggnog_db = "/home/inaiag/Databases/EggNOG/eggnog-mapper/data"
 params.bakta_db = "/home/inaiag/Databases/bakta/bakta_db"
 
-// params.bins_table = "/home/inaiag/Argentina/final_bins.tsv"
-params.bins_table = "/home/inaiag/Argentina/final_bins_copy.tsv"
+params.bins_table = "/home/inaiag/Argentina/final_bins.tsv"
+// params.bins_table = "/home/inaiag/Argentina/final_bins_copy.tsv"
 
 params.fa_pattern = "${params.input}/assembly_0"
 
@@ -30,7 +30,7 @@ workflow {
         def id = "${sample_name}_${file_name.split("_")[0]}" 
         def path = "${params.fa_pattern}/${sample_name}/Final_bestbinset/${file_name}.fa"
         [[meta_id: sample_name, id: id.split("_")[1]], path]
-    }.view()
+    }//.view()
 
     arq_ch = Channel.fromPath(params.arq)
         .splitCsv(sep: '\t').map{row -> row[0]}
@@ -49,7 +49,7 @@ workflow {
     combined_ch = fa_ch.combine(geral_ch, by:0).map { meta, path, kingdom ->
         def new_meta = meta + [kingdom: kingdom]
         [new_meta, path]
-    }.view()
+    }//.view()
 
     annot_info = BAKTA_BAKTA(combined_ch, params.bakta_db, [], [])
 
