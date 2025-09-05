@@ -22,7 +22,7 @@ include { BAKTA_BAKTA } from '../modules/nf-core/bakta/bakta/main'
 
 workflow {
     def bins_table = file(params.bins_table).text.split("\n").drop(1)
-    
+
     fa_ch = Channel.from(bins_table).map { row ->
         def columns = row.split("\t")
         def file_name = columns[0]
