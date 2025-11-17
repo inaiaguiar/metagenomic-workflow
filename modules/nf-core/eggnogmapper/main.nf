@@ -1,11 +1,10 @@
 process EGGNOGMAPPER {
-    tag "$meta.id"
-    label 'process_high'
+    debug params.debug
+    tag "${meta.id}"
 
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/eggnog-mapper:2.1.12--pyhdfd78af_0':
-        'biocontainers/eggnog-mapper:2.1.12--pyhdfd78af_0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/eggnog-mapper:2.1.12--pyhdfd78af_0'
+        : 'quay.io/biocontainers/eggnog-mapper:2.1.12--pyhdfd78af_0'}"
 
     input:
     tuple val(meta), path(fasta)
