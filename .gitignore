@@ -163,3 +163,7 @@ cython_debug/
 
 work/
 .nextflow*
+
+tower.config
+params.config
+remap.nf
