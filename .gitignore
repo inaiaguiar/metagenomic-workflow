@@ -166,4 +166,4 @@ work/
 
 tower.config
 params.config
-remap.nf
+remap_copy.nf
