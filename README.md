@@ -66,10 +66,12 @@ Execute os workflows nesta ordem para análise completa:
 
 - Saída: Contigs montados (final.contigs.fa) para cada amostra.
 
-- Stub: nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/assembly_output_stub/path -stub -profile stub
-
-- Commando: nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/assembly_output/path -resume -bg 
-
+```
+# Stub:
+nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/assembly_output_stub/path -stub -profile stub
+# Commando:
+nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/assembly_output/path -resume -bg 
+```
   
 
 ### 2️⃣ Binning - BASALT
