@@ -28,7 +28,7 @@ workflow {
             [[meta_id: parts[0], id: parts[1].split("_")[0]], "Bacteria"]}   
     
 
-    geral_ch = arq_ch.concat(bac_ch)//.view()
+    geral_ch = arq_ch.concat(bac_ch).view()
 
     combined_ch = fa_ch.combine(geral_ch, by:0).map { meta, path, kingdom ->
         def new_meta = meta + [kingdom: kingdom]

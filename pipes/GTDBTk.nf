@@ -22,7 +22,7 @@ workflow {
     fa_ch = Channel.fromPath("${params.gtdbtk.input}/assembly_0/*/Final_bestbinset/*.fa")
     .map{fa->
     [[meta_id: fa.getParent().getParent().getName(),
-    id: fa.getName().split("_")[0]], fa]}//.view()
+    id: fa.getName().split("_")[0]], fa]}.view()
 
     fasta_rn_ch = RENAME_FILES(fa_ch)
 
@@ -40,5 +40,4 @@ workflow {
                         .map { ["gtdb", it] }
     
     gtdbtk_ch = GTDBTK_CLASSIFYWF(fasta_sh, ch_db_for_gtdbtk, [], [])
-    // gtdbtk_ch = GTDBTK_CLASSIFYWF(fa_ch, ch_db_for_gtdbtk, [], [])
 }
