@@ -66,26 +66,12 @@ Execute os workflows nesta ordem para análise completa:
 
 - Saída: Contigs montados (final.contigs.fa) para cada amostra.
 
-```
-# Stub:
-nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/assembly_output_stub/path -stub -profile stub
-# Commando:
-nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/assembly_output/path -resume -bg 
-```
-  
 
 ### 2️⃣ Binning - BASALT
 
 - Criação de bins (MAGs) a partir dos contigs.
 
 - Saída: Bins em Results_basalt/*/Final_bestbinset/*.fa
-
-```
-# Stub:
-nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/clean_reads/path --outdir /your/basalt_output/path -stub -profile stub
-# Comando:
-nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/clean_reads/path --outdir /your/basalt_output/path -resume -bg
-```
   
 
 ### 3️⃣ Taxonomia de Reads e Contigs - Kraken2 e MetaPhlAn
@@ -93,13 +79,6 @@ nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/
 - Classificação taxonômica das reads (opcional, pode rodar em paralelo).
 
 - Saída: Perfis taxonômicos das comunidades.
-
-```
-# Stub:
-nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_output/path -stub -profile stub
-# Comando:
-nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_output/path -resume -bg
-```
 
 
 ### 4️⃣ Taxonomia de Bins - GTDBTk
@@ -109,13 +88,6 @@ nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_o
 - Saída: gtdbtk.*.summary.tsv - Classificações taxonômicas
   
 - Esses arquivos são necessários para os passos de anotação!
-
-```
-# Stub:
-nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -stub -profile stub
-# Comando:
-nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -resume -bg
-```
   
 
 ### 5️⃣ Anotação Funcional - Prokka OU Bakta + EggNOG
@@ -128,19 +100,13 @@ nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -re
 
 - Saída: Arquivos de anotação funcional (GFF, GenBank, FASTA de proteínas, anotações funcionais).
 
-- Prokka: 
-``` 
-# Stub:
-nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /your/prokka_output_stub/path -stub -profile stub
-# Comando:
-nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /your/prokka_output/path -resume -bg
-```
-- Bakta
+
+### Exemplos de comandos
 ```
 # Stub:
-nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output_stub/path -stub -profile stub
-# Comando:
-nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output/path -resume -bg
+nextflow run filename.nf -c your/params.config/path -stub -profile stub
+# Commando:
+nextflow run filename.nf -c your/params.config/path -resume -bg 
 ```
 
 
