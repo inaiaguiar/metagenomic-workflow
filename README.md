@@ -141,8 +141,7 @@ nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /
 nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output_stub/path -stub -profile stub
 # Comando:
 nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output/path -resume -bg
-``
-
+```
 
 
 ## 📦 Dependências
