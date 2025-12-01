@@ -167,3 +167,4 @@ work/
 tower.config
 params.config
 remap_copy.nf
+params.miniconda3
