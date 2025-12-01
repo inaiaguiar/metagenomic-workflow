@@ -80,10 +80,12 @@ nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/asse
 
 - Saída: Bins em Results_basalt/*/Final_bestbinset/*.fa
 
-- Stub: nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/clean_reads/path --outdir /your/basalt_output/path -stub -profile stub
-
-- Comando: nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/clean_reads/path --outdir /your/basalt_output/path -resume -bg
- 
+```
+# Stub:
+nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/clean_reads/path --outdir /your/basalt_output/path -stub -profile stub
+# Comando:
+nextflow run basalt.nf --input_assembly /your/assembly/path --input_fastq /your/clean_reads/path --outdir /your/basalt_output/path -resume -bg
+```
   
 
 ### 3️⃣ Taxonomia de Reads e Contigs - Kraken2 e MetaPhlAn
@@ -92,10 +94,12 @@ nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/asse
 
 - Saída: Perfis taxonômicos das comunidades.
 
-- Stub: nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_output/path -stub -profile stub
-
-- Comando: nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_output/path -resume -bg
-
+```
+# Stub:
+nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_output/path -stub -profile stub
+# Comando:
+nextflow run kraken_e_metaphlan.nf -c your/config/path --outdir /your/taxonomy_output/path -resume -bg
+```
 
 
 ### 4️⃣ Taxonomia de Bins - GTDBTk
@@ -106,10 +110,12 @@ nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/asse
   
 - Esses arquivos são necessários para os passos de anotação!
 
-- Stub: nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -stub -profile stub
-
-- Comando: nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -resume -bg
-
+```
+# Stub:
+nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -stub -profile stub
+# Comando:
+nextflow run GTDBTk.nf -c your/config/path --outdir /your/gtdbtk_output/path -resume -bg
+```
   
 
 ### 5️⃣ Anotação Funcional - Prokka OU Bakta + EggNOG
@@ -121,22 +127,21 @@ nextflow run megahit.nf --input_fastq /your/clean_reads/path --outdir /your/asse
     - Opção B: Bakta + EggNOG
 
 - Saída: Arquivos de anotação funcional (GFF, GenBank, FASTA de proteínas, anotações funcionais).
-  
-- Prokka:
-   
-   - Stub: nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /your/prokka_output_stub/path -stub -profile stub
-  
-   - Comando: nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /your/prokka_output/path -resume -bg
 
+- Prokka: 
+``` 
+# Stub:
+nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /your/prokka_output_stub/path -stub -profile stub
+# Comando:
+nextflow run prokka_e_eggnog_copy.nf --input /your/basalt_result/path --outdir /your/prokka_output/path -resume -bg
+```
 - Bakta
-
-   - Stub: nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output_stub/path -stub -profile stub
-
-   - Comando: nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output/path -resume -bg
-
-
-
-Todos os comandos e seus respectivos stub estão contidos no arquivo params.config
+```
+# Stub:
+nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output_stub/path -stub -profile stub
+# Comando:
+nextflow run bakta.nf --input /your/basalt_result/path --outdir /your/bakta_output/path -resume -bg
+``
 
 
 
