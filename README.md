@@ -108,6 +108,8 @@ nextflow run filename.nf -c your/params.config/path -stub -profile stub
 # Commando:
 nextflow run filename.nf -c your/params.config/path -resume -bg 
 ```
+Os comandos podem ser utilizados para qualquer pipe, substituindo o filename.nf pelo nome do arquivo contendo a pipe .nf. 
+Enquanto que os parâmetros devem ter seus caminhos definidos no arquivo params.config que deverá ter o ".example" removido para uso. Para utilização no comando, basta substituir o "your/params.config/path" pelo caminho da pasta onde foi salvo seu params.config
 
 
 ## 📦 Dependências
