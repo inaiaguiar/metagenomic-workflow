@@ -104,9 +104,9 @@ Execute os workflows nesta ordem para análise completa:
 ### Exemplos de comandos
 ```
 # Stub:
-nextflow run filename.nf -c your/params.config/path -stub -profile stub
+nextflow run filename.nf -c your/params.config/path --outdir your/output_dir/path -stub -profile stub
 # Commando:
-nextflow run filename.nf -c your/params.config/path -resume -bg 
+nextflow run filename.nf -c your/params.config/path --outdir your/output_dir/path -resume -bg 
 ```
 Os comandos podem ser utilizados para qualquer pipe, substituindo o filename.nf pelo nome do arquivo contendo a pipe .nf. 
 Enquanto que os parâmetros devem ter seus caminhos definidos no arquivo params.config que deverá ter o ".example" removido para uso. Para utilização no comando, basta substituir o "your/params.config/path" pelo caminho da pasta onde foi salvo seu params.config
