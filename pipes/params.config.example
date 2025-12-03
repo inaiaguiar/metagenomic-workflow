@@ -4,14 +4,12 @@ params {
 
     megahit {
         input_fastq = "/your/clean_reads/path"
-        outdir      = "/your/assembly_output/path"
 
     }
 
     kraken_metaphlan {
         input_assembly = "/your/assembly/path"
         input_fastq    = "/your/clean_reads/path"
-        outdir         = "/your/taxonomy_output/path"
         kraken_db      = "/your/kraken2_database/path"
         metaphlan_db   = "/your/metaphlan_database/path"
     }
@@ -19,13 +17,11 @@ params {
     basalt {
         input_assembly = "/your/assembly/path"
         input_fastq = "/your/clean_reads/path"
-        outdir = "/your/basalt_output/path"
         conda          = "/your/conda_envs/path/basalt-env"
     }   
 
     prokka_eggnog {
         input      = "/your/basalt_result/path"
-        outdir     = "/your/prokka_output/path"
         arq        = "/your/gtdb_results/path/gtdbtk.Samples.ar53.summary.tsv"
         bac        = "/your/gtdb_results/path/gtdbtk.Samples.bac120.summary.tsv"
         eggnog_db  = "/your/eggnog_database/path"
@@ -35,7 +31,6 @@ params {
 
     bakta {
         input      = "/your/basalt_result/path"
-        outdir     = "/your/bakta_output/path"
         arq        = "/your/gtdb_results/path/gtdbtk.Samples.ar53.summary.tsv"
         bac        = "/your/gtdb_results/path/gtdbtk.Samples.bac120.summary.tsv"
         eggnog_db  = "/your/eggnog_database/path"
@@ -46,7 +41,6 @@ params {
 
     gtdbtk {
         input     = "/your/basalt_temp_bins/path"
-        outdir    = "/your/gtdbtk_output/path"
         gtdbtk_db = "/your/gtdbtk_database/path"
     }
 
