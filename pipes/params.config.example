@@ -21,22 +21,20 @@ params {
     }   
 
     prokka_eggnog {
-        input      = "/your/basalt_result/path"
+        fa_pattern      = "/your/basalt_result/path"
         arq        = "/your/gtdb_results/path/gtdbtk.Samples.ar53.summary.tsv"
         bac        = "/your/gtdb_results/path/gtdbtk.Samples.bac120.summary.tsv"
         eggnog_db  = "/your/eggnog_database/path"
         bins_table = "/your/final_bins_copy/path/final_bins_copy.tsv"
-        fa_pattern = "${params.prokka_eggnog.input}/"
     }
 
     bakta {
-        input      = "/your/basalt_result/path"
+        fa_pattern = "/your/basalt_result/path"
         arq        = "/your/gtdb_results/path/gtdbtk.Samples.ar53.summary.tsv"
         bac        = "/your/gtdb_results/path/gtdbtk.Samples.bac120.summary.tsv"
         eggnog_db  = "/your/eggnog_database/path"
         bakta_db   = "/your/bakta_database/path"
         bins_table = "/your/final_bins_table/path/final_bins.tsv"
-        fa_pattern = "${params.bakta.input}/"
     }
 
     gtdbtk {
